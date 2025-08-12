@@ -42,6 +42,6 @@ The goal was to implement, compare, and deploy different approaches for face rec
 ## 🛠️ Installation & Usage
 ```bash
 git clone https://github.com/yourusername/face-recognition-pca-svm.git
-cd face-recognition-pca-svm
+cd streamlit-face-recognition-app
 pip install -r requirements.txt
-streamlit run streamlit_app/app.py
+streamlit run streamlit_app/main.py
