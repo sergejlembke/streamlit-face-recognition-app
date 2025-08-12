@@ -1,0 +1,10 @@
+imblearn
+jupyter
+matplotlib
+numpy
+opencv-python
+pandas
+scikit-learn
+seaborn
+streamlit
+streamlit-webrtc
