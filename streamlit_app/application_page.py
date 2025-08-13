@@ -2,7 +2,9 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-from sklearn.decomposition import PCA # type: ignore
+from sklearn.decomposition import PCA
+import face_detection
+import face_recognition
 
 
 def app():
@@ -48,12 +50,11 @@ def app():
                 width=700)
 
         
-    image_url = st.text_input('Link zum Bild', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmosaicmagazine.com%2Fwp-content%2Fuploads%2F2021%2F11%2FColin-Powell-Main.jpg&f=1&nofb=1&ipt=169e05121ad6f6b016fe027bb3d348b58dc5e42293212039a8fdec666309a785')
+    image_url = st.text_input('Link zum Bild', 'https://www.datocms-assets.com/128928/1742429537-colin-powell-main.jpg?auto=compress%2Cformat&fit=crop&h=640&w=960')
     try: 
         og, og_marked, crop = face_detection.get_face(image_url)
-        
-        if 'PCA + SVM' in selected_model:
 
+        if 'PCA + SVM' in selected_model:
             col_SL, col_SR = st.columns([1,1])
             col_SL1, col_SL2, col_SR1, col_SR2 = st.columns([1,1,1,1])
 
@@ -86,9 +87,7 @@ def app():
                 with col_SR1:
                     with st.spinner('Berechne Ergebnisse...', show_time=True):
                         try:
-                            pca, svm, X_2D = face_recognition.apply_model_A(selected_model=selected_model,
-                                                                    crop=crop,
-                                                                    )
+                            pca, svm, X_2D = face_recognition.apply_model_A(selected_model=selected_model, crop=crop)
 
                             X_2D_pca_inv = pca.inverse_transform(X_2D)
                             X_4D_pca_inv = X_2D_pca_inv.reshape(100, 75, 3)
@@ -114,8 +113,6 @@ def app():
                             st.write(y_names[mask])
                         except:
                             pass
-        
-            
         
         elif 'PCA + CS' in selected_model:
                         
@@ -151,10 +148,7 @@ def app():
                 with col_SR1:
                     with st.spinner('Berechne Ergebnisse...', show_time=True):
                         try:
-                            
-                            pca, X_2D, X_train_pca, y_train, y_all, relevant_labels, target_names_all, n_targets = face_recognition.preprocess_cs(selected_model=selected_model,
-                                                                                                                crop=crop
-                                                                                                                )
+                            pca, X_2D, X_train_pca, y_train, y_all, relevant_labels, target_names_all, n_targets = face_recognition.preprocess_cs(selected_model=selected_model, crop=crop)
 
                             X_2D_pca_inv = pca.inverse_transform(X_2D)
                             X_4D_pca_inv = X_2D_pca_inv.reshape(100, 75, 3)

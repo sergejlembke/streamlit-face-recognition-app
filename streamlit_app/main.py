@@ -32,8 +32,8 @@ load_css("styles.css")
 
 
 if 'page' not in st.session_state:
-    # st.session_state.page = 'Introduction' 
-    select = 'Introduction'
+    st.session_state.page = 'Introduction' 
+    # select = 'Introduction'
 
 pages = {
     'Introduction'      : introduction_page,

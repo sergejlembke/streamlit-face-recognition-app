@@ -4,26 +4,26 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-from imblearn.over_sampling import RandomOverSampler # type: ignore
+from imblearn.over_sampling import RandomOverSampler
 from PIL import Image
-from sklearn.decomposition import PCA # type: ignore
-from sklearn.preprocessing import StandardScaler # type: ignore
-from sklearn.model_selection import train_test_split # type: ignore
-from sklearn.metrics.pairwise import cosine_similarity # type: ignore
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 
 
 def apply_model_A(selected_model: str, crop: np.ndarray) -> tuple:
-    directory = 'modelS/model_A/'
+    directory = 'model_A/'
     
-    if selected_model == ':rainbow[A1: PCA + SVM [96,15 % Accuracy]]':
+    if 'A1' in selected_model:
         filename_raw = "140_C=1.0_gamma=0.01_PCAn=70_2025-05-09_06-14-04.sav"
-    elif selected_model == ':rainbow[A2: PCA + SVM [90,79 % Accuracy]]':
+    elif 'A2' in selected_model:
         filename_raw = "100_C=1.0_gamma=0.01_PCAn=70_2025-05-09_06-15-38.sav"
-    elif selected_model == ':rainbow[A3: PCA + SVM [85,56 & Accuracy]]':
+    elif 'A3' in selected_model:
         filename_raw = "60_C=1.0_gamma=0.01_PCAn=80_2025-05-09_07-11-12.sav"
-    elif selected_model == ':rainbow[A4: PCA + SVM [74,87 & Accuracy]]':
+    elif 'A4' in selected_model:
         filename_raw = '40_C=10.0_gamma=0.01_PCAn=80_2025-05-09_08-30-10.sav'
         
     # load the scaler, pca and svm
@@ -43,31 +43,24 @@ def apply_model_A(selected_model: str, crop: np.ndarray) -> tuple:
 
 def preprocess_cs(selected_model: str, crop: np.ndarray) -> tuple:
         
-    if selected_model == ':rainbow[B1: PCA + CS [96,15 % Accuracy]]':
+    if 'B1' in selected_model:
         n_components = 160
         min_faces = 140
-    elif selected_model == ':rainbow[B2: PCA + CS [90,79 % Accuracy]]':
+    elif 'B2' in selected_model:
         n_components = 200
         min_faces = 100
-    elif selected_model == ':rainbow[B3: PCA + CS [87,78 % Accuracy]]':
+    elif 'B3' in selected_model:
         n_components = 360
         min_faces = 60
-    elif selected_model == ':rainbow[B4: PCA + CS [77,54 % Accuracy]]':
+    elif 'B4' in selected_model:
         n_components = 450
         min_faces = 40
-        
-    ROS = True
-    h = 100
-    w = 75
-
-    dir_path = f'modelS/dataset/'
-    file_name = f'OG_clr_{h}x{w}_1_uint8.npz'
-
-    X_all_uint8 = np.load(dir_path + file_name)['arr']
+    
+    X_all_uint8 = np.load('dataset/OG_clr_100x75_1_uint8.npz')['arr']
     X_all = X_all_uint8.reshape(X_all_uint8.shape[0], -1)
 
-    y_all = np.load('modelS/dataset/Target_ID.npy')
-    target_names_all = np.load('modelS/dataset/Target_Names.npy')
+    y_all = np.load('dataset/Target_ID.npy')
+    target_names_all = np.load('dataset/Target_Names.npy')
 
     unique, counts = np.unique(y_all, return_counts=True)
     labels_count = np.array([(label, count) for label, count in zip(unique, counts)])
@@ -91,14 +84,13 @@ def preprocess_cs(selected_model: str, crop: np.ndarray) -> tuple:
 
     del X, X_all_uint8, X_all, X_test, y_test, y
 
-    if ROS:
-        ros = RandomOverSampler(random_state=42)
-        X_train_res, y_train_res = ros.fit_resample(X_train, y_train)
-        del X_train, y_train
-        
-        X_train = X_train_res
-        y_train = y_train_res
-        del X_train_res, y_train_res
+    ros = RandomOverSampler(random_state=42)
+    X_train_res, y_train_res = ros.fit_resample(X_train, y_train)
+    del X_train, y_train
+    
+    X_train = X_train_res
+    y_train = y_train_res
+    del X_train_res, y_train_res
 
     gc.collect()
     

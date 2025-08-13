@@ -5,19 +5,18 @@ import requests
 
 
 def get_face(image_url: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-
+    
     img_data = requests.get(image_url).content
-    with open('modelS/images/image.jpg', 'wb') as handler:
+    with open('face_detection/image.jpg', 'wb') as handler:
         handler.write(img_data)
         
-    
     # 1. Classifier laden
-    face_cascade = cv2.CascadeClassifier("modelS/detection/haarcascade_frontalface_default.xml")
+    face_cascade = cv2.CascadeClassifier("face_detection/haarcascade_frontalface_default.xml")
 
     # 2. Ordner durchlaufen, Bildpfad erstellen, Zähler erstellen und Bilder laden
     dirname = os.path.dirname(__file__)
 
-    relevanter_Ordner = os.path.join(dirname, "images")
+    relevanter_Ordner = os.path.join(dirname, "face_detection")
 
 
 
@@ -27,14 +26,14 @@ def get_face(image_url: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
             originalbild = cv2.imread(bildpfad)
 
             
-            3.#Bildbearbeitung durchführen
+            # 3. Bildbearbeitung durchführen
             if originalbild is not None:
                 # Von BGR-> In RGB und Graustufen konvertieren
                 bild_rgb = cv2.cvtColor(originalbild, cv2.COLOR_BGR2RGB)
                 bild_grau = cv2.cvtColor(bild_rgb, cv2.COLOR_RGB2GRAY)
 
                 # 4. Gesichtserkennung
-                faces = face_cascade.detectMultiScale(bild_grau, scaleFactor=1.3, minNeighbors=4)
+                faces = face_cascade.detectMultiScale(bild_grau, scaleFactor=1.4, minNeighbors=4)
 
                 if len(faces) != 1:
                     continue 

@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-from sklearn.decomposition import PCA # type: ignore
+from sklearn.decomposition import PCA
 
 
 def app():
