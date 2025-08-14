@@ -1,3 +1,4 @@
+
 import streamlit as st
 import os
 import cv2
@@ -10,8 +11,6 @@ from PIL import Image
 from sklearn.decomposition import PCA
 from pathlib import Path
 from typing import List, Tuple
-
-# from modelS import face_recognition_page
 
 st.set_page_config(layout='wide') 
 

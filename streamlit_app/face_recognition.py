@@ -1,3 +1,6 @@
+import sys
+import os
+
 import gc
 import pickle
 
@@ -5,12 +8,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from imblearn.over_sampling import RandomOverSampler
-from PIL import Image
+# from PIL import Image
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.datasets import fetch_lfw_people
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from lfw_utils import get_lfw_data_cached
+lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
 
 
 
@@ -35,7 +42,7 @@ def apply_model_A(selected_model: str, crop: np.ndarray) -> tuple:
     X_2D = sca.transform(X_2D)
     X_2D = pca.transform(X_2D)
     
-    return pca, svm, X_2D
+    return pca, sca, svm, X_2D
 
 
 
@@ -56,11 +63,11 @@ def preprocess_cs(selected_model: str, crop: np.ndarray) -> tuple:
         n_components = 450
         min_faces = 40
     
-    X_all_uint8 = np.load('dataset/OG_clr_100x75_1_uint8.npz')['arr']
-    X_all = X_all_uint8.reshape(X_all_uint8.shape[0], -1)
+    lfw = fetch_lfw_people(color=True, resize=0.8, funneled=True, download_if_missing=True)
 
-    y_all = np.load('dataset/Target_ID.npy')
-    target_names_all = np.load('dataset/Target_Names.npy')
+    X_all = lfw.images
+    y_all = lfw.target
+    target_names_all = lfw.target_names
 
     unique, counts = np.unique(y_all, return_counts=True)
     labels_count = np.array([(label, count) for label, count in zip(unique, counts)])
@@ -81,19 +88,23 @@ def preprocess_cs(selected_model: str, crop: np.ndarray) -> tuple:
 
     # Split data into train and test data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    del X, X_all_uint8, X_all, X_test, y_test, y
+    
+    del X, X_all, X_test, y_test, y
 
     ros = RandomOverSampler(random_state=42)
-    X_train_res, y_train_res = ros.fit_resample(X_train, y_train)
+    n_samples = X_train.shape[0]
+    X_train_flat = X_train.reshape(n_samples, -1)
+    X_train_res, y_train_res = ros.fit_resample(X_train_flat, y_train)
+
+    # X_train_res, y_train_res = ros.fit_resample(X_train, y_train)
     del X_train, y_train
-    
+
     X_train = X_train_res
     y_train = y_train_res
     del X_train_res, y_train_res
 
     gc.collect()
-    
+
     X_train = X_train.astype(np.float64) / 255.0
 
     # Standardize the data
@@ -108,7 +119,7 @@ def preprocess_cs(selected_model: str, crop: np.ndarray) -> tuple:
     X_2D = sca.transform(X_2D)
     X_2D = pca.transform(X_2D)
     
-    return  pca, X_2D, X_train_pca, y_train, y_all, relevant_labels, target_names_all, n_targets
+    return  pca, sca, X_2D, X_train_pca, y_train, y_all, relevant_labels, target_names_all, n_targets
 
 
 

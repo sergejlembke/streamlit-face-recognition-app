@@ -1,11 +1,46 @@
+import sys
+import os
+
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+# from sklearn.decomposition import PCA
 
-from sklearn.decomposition import PCA
 import face_detection
 import face_recognition
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from lfw_utils import get_lfw_data_cached
+lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
+
+def plot_og_marked(og_marked):
+    fig = plt.figure()
+    plt.title('Original image with detected face')
+    plt.xlabel(f'$w$')
+    plt.ylabel(f'$h$')
+    plt.imshow(og_marked)
+    st.pyplot(fig)
+
+def plot_cropface(crop):
+    fig = plt.figure()
+    plt.title('Crop of detected face')
+    plt.xlabel(f'$w$')
+    plt.ylabel(f'$h$')
+    plt.imshow(crop)
+    st.pyplot(fig)
+
+def plot_eigenface(X_2D, pca, sca):
+    X_2D_pca_inv = pca.inverse_transform(X_2D)
+    X_2D_inv_scaled = sca.inverse_transform(X_2D_pca_inv)
+    X_2D_img = (X_2D_inv_scaled * 255).clip(0, 255).astype(np.uint8)
+    X_4D_pca_inv = X_2D_img.reshape(100, 75, 3)
+    fig = plt.figure()
+    plt.title('Eigen-Image of detected face')
+    plt.xlabel(f'$w$')
+    plt.ylabel(f'$h$')
+    plt.imshow(X_4D_pca_inv)
+    st.pyplot(fig)
+    
 
 def app():
     st.title('Zusammenführen von Face Detection & Face Recognition')
@@ -62,23 +97,13 @@ def app():
                 st.info('Face Detection')
                 with col_SL1:
                     try:
-                        fig = plt.figure()
-                        plt.title('Original mit erkanntem Gesicht')
-                        plt.xlabel(f'$w$')
-                        plt.ylabel(f'$h$')
-                        plt.imshow(og_marked)
-                        st.pyplot(fig)
+                        plot_og_marked(og_marked)
                     except:
                         pass
                 
                 with col_SL2:
                     try:
-                        fig = plt.figure()
-                        plt.title('Crop des erkanntes Gesichts')
-                        plt.xlabel(f'$w$')
-                        plt.ylabel(f'$h$')
-                        plt.imshow(crop)
-                        st.pyplot(fig)
+                        plot_cropface(crop)
                     except:
                         pass
                 
@@ -87,23 +112,19 @@ def app():
                 with col_SR1:
                     with st.spinner('Berechne Ergebnisse...', show_time=True):
                         try:
-                            pca, svm, X_2D = face_recognition.apply_model_A(selected_model=selected_model, crop=crop)
-
-                            X_2D_pca_inv = pca.inverse_transform(X_2D)
-                            X_4D_pca_inv = X_2D_pca_inv.reshape(100, 75, 3)
-                            fig = plt.figure()
-                            plt.title('Eigen-Bild')
-                            plt.xlabel(f'$w$')
-                            plt.ylabel(f'$h$')
-                            plt.imshow(X_4D_pca_inv)
-                            st.pyplot(fig)
+                            pca, sca, svm, X_2D = face_recognition.apply_model_A(selected_model=selected_model, crop=crop)
+                            plot_eigenface(X_2D, pca, sca)
                         except:
                             pass
                         
                     with col_SR2:
                         try:
-                            y_id = np.load('dataset/Target_ID.npy')
-                            y_names = np.load('dataset/Target_Names.npy')
+                            # y_id = np.load('dataset/Target_ID.npy')
+                            # y_names = np.load('dataset/Target_Names.npy')
+                            y_all = lfw.target
+                            target_names_all = lfw.target_names
+                            y_id = y_all
+                            y_names = target_names_all
                             
                             y_pred = svm.predict(X_2D)
                             
@@ -123,23 +144,13 @@ def app():
                 st.info('Face Detection')
                 with col_SL1:
                     try:
-                        fig = plt.figure()
-                        plt.title('Original mit erkanntem Gesicht')
-                        plt.xlabel(f'$w$')
-                        plt.ylabel(f'$h$')
-                        plt.imshow(og_marked)
-                        st.pyplot(fig)
+                        plot_og_marked(og_marked)
                     except:
                         pass
                 
                 with col_SL2:
                     try:
-                        fig = plt.figure()
-                        plt.title('Crop des erkanntes Gesichts')
-                        plt.xlabel(f'$w$')
-                        plt.ylabel(f'$h$')
-                        plt.imshow(crop)
-                        st.pyplot(fig)
+                        plot_cropface(crop)
                     except:
                         pass
                 
@@ -148,17 +159,8 @@ def app():
                 with col_SR1:
                     with st.spinner('Berechne Ergebnisse...', show_time=True):
                         try:
-                            pca, X_2D, X_train_pca, y_train, y_all, relevant_labels, target_names_all, n_targets = face_recognition.preprocess_cs(selected_model=selected_model, crop=crop)
-
-                            X_2D_pca_inv = pca.inverse_transform(X_2D)
-                            X_4D_pca_inv = X_2D_pca_inv.reshape(100, 75, 3)
-                            fig = plt.figure()
-                            plt.title('Eigen-Bild')
-                            plt.xlabel(f'$w$')
-                            plt.ylabel(f'$h$')
-                            plt.imshow(X_4D_pca_inv)
-                            st.pyplot(fig)
-                            
+                            pca, sca, X_2D, X_train_pca, y_train, y_all, relevant_labels, target_names_all, n_targets = face_recognition.preprocess_cs(selected_model=selected_model, crop=crop)
+                            plot_eigenface(X_2D, pca, sca)
                         except:
                             pass
                     
