@@ -1,18 +1,4 @@
-
 import streamlit as st
-import os
-import cv2
-import gc
-import random
-import matplotlib.pyplot as plt
-import numpy as np
-import pickle
-from PIL import Image
-from sklearn.decomposition import PCA
-from pathlib import Path
-from typing import List, Tuple
-
-st.set_page_config(layout='wide') 
 
 import model_overview_page
 import eigen_images_page
@@ -22,6 +8,8 @@ import model_b_page
 import comparison_page
 import application_page
 import webcam_page
+
+st.set_page_config(layout='wide') 
 
 def load_css(file_path):
     with open(file_path) as f:

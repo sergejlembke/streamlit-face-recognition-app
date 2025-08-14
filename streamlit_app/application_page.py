@@ -4,7 +4,6 @@ import os
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
-# from sklearn.decomposition import PCA
 
 import face_detection
 import face_recognition

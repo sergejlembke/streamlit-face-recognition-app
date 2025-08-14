@@ -1,14 +1,11 @@
 import sys
 import os
-
 import gc
 import pickle
 
-import matplotlib.pyplot as plt
 import numpy as np
 
 from imblearn.over_sampling import RandomOverSampler
-# from PIL import Image
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
