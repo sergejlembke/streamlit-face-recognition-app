@@ -6,6 +6,8 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
+from sklearn.decomposition import PCA
+from typing import Any
 
 # --- Local imports ---
 import face_detection
@@ -18,8 +20,10 @@ from lfw_utils import get_lfw_data_cached
 # Fetch the LFW dataset (cached)
 lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
 
-def plot_og_marked(og_marked):
-    """Plot the original image with detected face marked."""
+def plot_og_marked(og_marked: np.ndarray) -> None:
+    """
+    Plot the original image with detected face marked.
+    """
     fig = plt.figure()
     plt.title('Original image with detected face')
     plt.xlabel(f'$w$')
@@ -27,16 +31,18 @@ def plot_og_marked(og_marked):
     plt.imshow(og_marked)
     st.pyplot(fig)
 
-def plot_cropface(crop):
-    """Plot the cropped face image."""
+def plot_cropface(crop: np.ndarray) -> None:
+    """
+    Plot the cropped face image.
+    """
     fig = plt.figure()
-    plt.title('Crop of detected face')
+    plt.title('Detected face')
     plt.xlabel(f'$w$')
     plt.ylabel(f'$h$')
     plt.imshow(crop)
     st.pyplot(fig)
 
-def plot_eigenface(X_2D, pca, sca):
+def plot_eigenface(X_2D: np.ndarray, pca: PCA, sca: Any) -> None:
     """
     Plot the reconstructed eigenface from PCA and StandardScaler.
     X_2D: PCA-transformed face
@@ -49,26 +55,43 @@ def plot_eigenface(X_2D, pca, sca):
     X_2D_img = (X_2D_inv_scaled * 255).clip(0, 255).astype(np.uint8)
     X_4D_pca_inv = X_2D_img.reshape(100, 75, 3)
     fig = plt.figure()
-    plt.title('Eigen-image of detected face')
+    plt.title('Eigenimage of detected face')
     plt.xlabel(f'$w$')
     plt.ylabel(f'$h$')
     plt.imshow(X_4D_pca_inv)
     st.pyplot(fig)
     
 
-def app():
-    """Main Streamlit app function for face detection and recognition demo."""
+def app() -> None:
+    """
+    Main Streamlit app function for face detection and recognition demo.
+    """
+    # --- Page Title ---
     st.title('Demo of Face Detection & Face Recognition')
     st.write('')
     st.write('')
+    st.write('')
     
-    # Model selection and confusion matrix display
+    st.write(
+    """
+    To use this demo:
+    - Select a face recognition model (**Model A: PCA + SVM** or **Model B: PCA + CS**), each with different configurations and sets of people trained on
+    - See the list of people recognized by each model in the radio button captions
+    - Paste the URL of an image containing a person named in the captions (e.g., Colin Powell, George W. Bush, etc.)
+    - The app will perform face detection and then apply the selected recognition model to predict the identity in the image
+    - The results, including the detected face, the respective eigenimage and predicted name, are displayed interactively
+    """
+        
+    )
+    
+    
+    # --- Model selection and confusion matrix ---
     col_1, col_2 = st.columns([1,1])
     
     with col_1:
         # Radio button for model selection with captions
         selected_model = st.radio(
-            "Model for Prediction",
+            "**Select a model for prediction**",
             [
                 ':rainbow[A1: PCA + SVM [96.15 % Accuracy]]',
                 ':rainbow[A2: PCA + SVM [90.79 % Accuracy]]',
@@ -115,9 +138,10 @@ def app():
             width=700
         )
 
+    # --- Model application ---
     # Input for image URL
     image_url = st.text_input(
-        'Image URL for detection and recognition',
+        'Insert image URL for detection and recognition',
         'https://www.datocms-assets.com/128928/1742429537-colin-powell-main.jpg?auto=compress%2Cformat&fit=crop&h=640&w=960'
     )
     try: 

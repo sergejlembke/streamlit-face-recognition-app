@@ -4,17 +4,19 @@ import numpy as np
 import streamlit as st
 from sklearn.decomposition import PCA
 
-def app():
-    """Main Streamlit app function for displaying eigen images based on PCA."""
-    st.title('Eigen Images')
+def app() -> None:
+    """
+    Streamlit page for displaying eigenimages based on PCA.
+    """
+    st.title('Eigenimage')
     
-    # Description of PCA and eigenimages
+    # Combined explanation of eigenimages, PCA, and the slider functionality
     st.write(
-        'Reduction of images to $n$ components. The inverse of the PCA can be displayed as an eigenimage (representation of the eigenvectors) to illustrate dimensionality reduction:'
-    )
-    st.write(
-        "The eigen-images shown here are based on a PCA applied to the 530 images of George W. Bush from the LFW dataset. "
-        "If the value of the slider for the $n$ dimensions is set to 1, a face of George W. Bush appears, which can be seen as the 'average face' based on the 530 face images of George W. Bush."
+        """
+        This page visualizes the concept of eigenimages using 530 images of George W. Bush from the LFW dataset. By applying Principal Component Analysis (PCA), each face image is represented as a combination of principal components (eigenimages), which capture the most important features across all images and illustrate dimensionality reduction.
+        
+        Use the slider to select the number of principal components used for reconstruction. When the slider is set to 1, the reconstructed image shows the 'average face' of George W. Bush, as only the first principal component (which captures the most variance) is used. Increasing the number of components adds more detail and individuality to the reconstruction, approaching the original image as more components are included.
+        """
     )
 
     # Load Bush images (uint8) and normalize for PCA
@@ -22,8 +24,8 @@ def app():
     X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64) / 255.0
 
     # Slider to select an image and number of PCA components
-    pic = st.slider('Select an image:', 0, 500, 198, key=1)
-    n_components = st.slider('Reduce to $n$ dimensions:', 1, 500, 90, key=2)
+    pic = st.slider('Select an image:', 1, 530, 197, key=1) + 1
+    n_components = st.slider('Reduce to $n$ components:', 1, 400, 90, key=2)
 
     # Layout columns for original and eigen images
     col_1, col_2, col_3 = st.columns([1.5, 1.5, 2])
@@ -33,8 +35,8 @@ def app():
         image_4Darray = X_Bush_uint8[pic]
         fig = plt.figure()
         plt.title('Original Image')
-        plt.xlabel('$w$')
-        plt.ylabel('$h$')
+        plt.xlabel(f'$w$')
+        plt.ylabel(f'$h$')
         plt.imshow(image_4Darray)
         st.pyplot(fig)
 
@@ -46,8 +48,8 @@ def app():
         X_4D_pca_inv = X_2D_pca_inv[pic].reshape(100, 75, 3)
         X_4D_pca_inv_uint8 = (np.clip(X_4D_pca_inv, 0, 1) * 255).astype(np.uint8)
         fig = plt.figure()
-        plt.title('Eigen Image')
-        plt.xlabel('$w$')
-        plt.ylabel('$h$')
+        plt.title('Eigenimage')
+        plt.xlabel(f'$w$')
+        plt.ylabel(f'$h$')
         plt.imshow(X_4D_pca_inv_uint8)
         st.pyplot(fig)

@@ -42,7 +42,7 @@ def get_face(image_url: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
                 image_gray = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2GRAY)
 
                 # Detect faces in the grayscale image
-                faces = face_cascade.detectMultiScale(image_gray, scaleFactor=1.4, minNeighbors=4)
+                faces = face_cascade.detectMultiScale(image_gray, scaleFactor=1.3, minNeighbors=4)
 
                 # Only proceed if exactly one face is detected
                 if len(faces) != 1:
@@ -83,7 +83,7 @@ def get_face(image_url: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
                     # Mark the detected face on the image
                     marked_face = cv2.rectangle(image_rgb.copy(), (x1, y1), (x2, y2), (255, 0, 150), 4)
-
+                    
                     # Return the results as soon as a face is found
                     return original_image, marked_face, cropped_face
 

@@ -7,14 +7,14 @@ st.set_page_config(layout='wide')
 # Import all Streamlit app pages
 import application_page
 import comparison_page
-import eigen_images_page
+import streamlit_app.eigen_images_page as eigen_images_page
 import introduction_page
 import model_a_page
 import model_b_page
 import model_overview_page
 import webcam_page
 
-def load_css(file_path):
+def load_css(file_path: str) -> None:
     """Load a custom CSS file for Streamlit styling."""
     with open(file_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)

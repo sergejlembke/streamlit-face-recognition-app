@@ -4,6 +4,8 @@
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 import cv2
+import numpy as np
+from typing import Optional, Any
 
 # Load Haar cascade for face detection
 face_cascade = cv2.CascadeClassifier("face_detection/haarcascade_frontalface_default.xml")
@@ -16,22 +18,22 @@ class VideoProcessor(VideoTransformerBase):
     """
     Video processor class for real-time face detection in webcam stream.
     """
-    def __init__(self):
-        self.frame = None
+    def __init__(self) -> None:
+        self.frame: Optional[np.ndarray] = None
 
-    def transform(self, frame):
+    def transform(self, frame: Any) -> np.ndarray:
         """
         Detect faces in the video frame and draw rectangles around them.
         """
         img = frame.to_ndarray(format="bgr24")
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.4, 4)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 4)
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
         self.frame = img
         return img
 
-def app():
+def app() -> None:
     """
     Streamlit app function for live webcam face detection and cropping.
     """
@@ -64,7 +66,7 @@ def app():
 
                 # Convert to grayscale and detect faces
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-                faces = face_cascade.detectMultiScale(gray, scaleFactor=1.4, minNeighbors=4)
+                faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=4)
                 if len(faces) > 0:
                     for (x, y, w, h) in faces:
                         # Center of the detected face
