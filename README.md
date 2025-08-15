@@ -9,7 +9,7 @@ The goal was to implement, compare, and deploy different approaches for face rec
 ## 🚀 Features
 - **Technologies:** Python, NumPy, scikit-learn, openCV2, Streamlit  
 - **Algorithms:** Principal Component Analysis (PCA), Support Vector Machines (SVM), Cosine Similarity  
-- **Dataset:** [LFW – Labeled Faces in the Wild](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset)  
+- **Dataset:** [LFW – Labeled Faces in the Wild](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_lfw_people.html) fetched from scikit-learn
 - **Outcome:** Interactive face recognition app comparing two model approaches
 
 ---
@@ -45,3 +45,11 @@ git clone https://github.com/yourusername/face-recognition-pca-svm.git
 cd streamlit-face-recognition-app
 pip install -r requirements.txt
 streamlit run streamlit_app/main.py
+```
+
+---
+
+## 📄 Licenses & Third-Party Dependencies
+
+- This project uses [OpenCV (cv2)](https://opencv.org/), which is licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+- The Haar cascade file `haarcascade_frontalface_default.xml` is part of the OpenCV project and is also licensed under the Apache 2.0 License.

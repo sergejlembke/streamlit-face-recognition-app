@@ -1,27 +1,32 @@
+# --- Third-party imports ---
 import streamlit as st
 
-import model_overview_page
+# Set Streamlit page layout to wide
+st.set_page_config(layout='wide') 
+
+# Import all Streamlit app pages
+import application_page
+import comparison_page
 import eigen_images_page
 import introduction_page
 import model_a_page
 import model_b_page
-import comparison_page
-import application_page
+import model_overview_page
 import webcam_page
 
-st.set_page_config(layout='wide') 
-
 def load_css(file_path):
+    """Load a custom CSS file for Streamlit styling."""
     with open(file_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+# Load custom styles
 load_css("styles.css")
 
-
+# Initialize the session state for page navigation
 if 'page' not in st.session_state:
     st.session_state.page = 'Introduction' 
-    # select = 'Introduction'
 
+# Dictionary mapping page names to their corresponding modules
 pages = {
     'Introduction'      : introduction_page,
     'Eigen Images'      : eigen_images_page,
@@ -31,10 +36,11 @@ pages = {
     'Comparison'        : comparison_page,
     'Application'       : application_page,
     'Webcam'            : webcam_page,
-    }
+}
 
 pages_names = list(pages.keys())
 
+# Sidebar navigation for the app
 st.sidebar.title('Introduction')
 
 if st.sidebar.button(pages_names[0]):
@@ -57,4 +63,5 @@ if st.sidebar.button(pages_names[6]):
 if st.sidebar.button(pages_names[7]):
     st.session_state.page = pages_names[7]
 
+# Render the selected page
 pages[st.session_state.page].app()
