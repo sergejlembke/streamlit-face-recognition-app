@@ -29,7 +29,7 @@ if 'page' not in st.session_state:
 # Dictionary mapping page names to their corresponding modules
 pages = {
     'Introduction'      : introduction_page,
-    'Eigen Images'      : eigen_images_page,
+    'Eigenimage'        : eigen_images_page,
     'Model Overview'    : model_overview_page,
     'Model A: PCA + SVM': model_a_page,
     'Model B: PCA + CS' : model_b_page,

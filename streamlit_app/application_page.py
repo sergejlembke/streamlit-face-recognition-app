@@ -67,7 +67,7 @@ def app() -> None:
     Main Streamlit app function for face detection and recognition demo.
     """
     # --- Page Title ---
-    st.title('Demo of Face Detection & Face Recognition')
+    st.title('Demo of Face Detection & Recognition')
     st.write('')
     st.write('')
     st.write('')
