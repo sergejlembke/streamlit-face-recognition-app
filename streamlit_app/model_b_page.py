@@ -42,9 +42,11 @@ def app() -> None:
     st.write('')
 
     # --- Step 1: Calculate CS for each image ---
-    st.info(f'Step 1:  Calculate $CS$ for each image in $X_{{test}}$ with each image in $X_{{train}}$')
+    col_S1, col_S2, = st.columns([1, 1]) 
+    with col_S1:
+        st.info(f'**Step 1:  Calculate $CS$ for each image in $X_{{test}}$ with each image in $X_{{train}}$**')
     # Explain the process of comparing each test image to all training images
-    st.write('In this step, we compare each test image from $X_{{test}}$ to every training image in $X_{{train}}$ by calculating the $CS$ between their feature vectors. This results in a set of $CS$ values for each test image, one for each training image. The higher the $CS$, the more similar the test image is to the corresponding training image.')
+    st.write('In this step, each test image from $X_{{test}}$ is compared with every training image in $X_{{train}}$ by calculating the $CS$ between their feature vectors. This results in a set of $CS$ values for each test image, one for each training image. The higher the $CS$, the more similar the test image is to the corresponding training image.')
     st.write('')
     # Describe the plots for Step 1
     st.write('The following plots illustrate this process for images of Gerhard Schröder:')
@@ -84,7 +86,9 @@ def app() -> None:
     # --- Step 2: Aggregate CS per image per person and make predictions ---
     st.divider()
     st.write('')
-    st.info(f'Step 2:  Aggregate $CS$ per image per person and make predictions')
+    col_S1, col_S2, = st.columns([1, 1]) 
+    with col_S1:
+        st.info(f'**Step 2:  Aggregate $CS$ per image per person and make predictions**')
     # Explain the aggregation and prediction process
     st.write('In this step, we move from comparing individual images to making a prediction for each test image. For every test image in $X_{{test}}$, we calculate the $CS$ with all training images in $X_{{train}}$, grouped by person. For each person, we sum and average the $CS$ values between the test image and all of their training images. This results in one average $CS$ value per person for each test image.')
     st.write('')

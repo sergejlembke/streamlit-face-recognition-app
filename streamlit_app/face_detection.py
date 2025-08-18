@@ -41,7 +41,10 @@ def get_face(image_url: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
                 image_rgb = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
                 image_gray = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2GRAY)
 
-                # Detect faces in the grayscale image
+                # Detect faces in the grayscale image using OpenCV2 and the Haar Cascade classifier.
+                # The 'haarcascade_frontalface_default.xml' file contains a pre-trained model for frontal face detection.
+                # The parameters scaleFactor=1.3 and minNeighbors=4 were chosen after experimentation, as they provided the best balance
+                # between detecting true faces and minimizing false positives for this dataset and application.
                 faces = face_cascade.detectMultiScale(image_gray, scaleFactor=1.3, minNeighbors=4)
 
                 # Only proceed if exactly one face is detected

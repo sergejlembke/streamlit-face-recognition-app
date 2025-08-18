@@ -30,9 +30,10 @@ def app() -> None:
     # Summary of PCA explained variance plot
     st.write(
         """
-        **Summary of PCA Explained Variance:**
-        
-        The PCA explained variance plot shows how much of the total variance in the LFW dataset is captured by each principal component (PC). Cumulative explained variance (CEA) is a measure of how much information from the original data is retained when using the first $n$ PCs. For example, at $n=100$ components, the CEA remains above 90%, meaning that more than 90% of the original image information is preserved. This allows for significant dimensionality reduction while still retaining the essential features needed for accurate face recognition.
+        The PCA explained variance plot shows how much of the total variance in the LFW dataset is captured by each principal component (PC).
+        Cumulative explained variance (CEA) is a measure of how much information from the original data is retained when using the first $n$ PCs.
+        For example, at $n=100$ components, the CEA remains above 90%, meaning that more than 90% of the original image information is preserved.
+        This allows for significant dimensionality reduction while still retaining the essential features needed for accurate face recognition.
         """
     )
 
@@ -50,8 +51,10 @@ def app() -> None:
     and the best set of SVM hyperparameters, in order to maximize classification accuracy.
     The following two plots show the results of this joint hyperparameter search, performed separately for black & white (left plot) and RGB images (right plot).
 
-    In each plot, the upper subplots show the explained variance ratio for each principal component (PC), while the lower subplots display the distribution of the classification accuracy (validation) for each parameter setting.
-    The vertical lines (error bars) represent the spread (variance) of the accuracy scores across cross-validation folds, providing insight into the stability and reliability of the model's performance for each configuration.
+    In each plot, the upper subplots show the explained variance ratio for each principal component (PC), while the lower subplots display the distribution of the 
+    classification accuracy (validation) for each parameter setting.
+    The vertical lines (error bars) represent the spread (variance) of the accuracy scores across cross-validation folds, providing insight into the stability and 
+    reliability of the model's performance for each configuration.
     """
     )
 
@@ -73,9 +76,9 @@ def app() -> None:
     # Note on model performance
     st.write(
     """
-    **Summary of Results:**
-
-    Comparing the two plots, it is clear that the model achieves higher classification accuracy when using RGB images compared to black & white images. The validation accuracy is consistently higher for RGB, and the error bars (variance across folds) are generally smaller, indicating more stable and reliable performance. This suggests that the additional color information in RGB images provides valuable features for the SVM classifier, leading to better face recognition results.
+    Comparing the two plots, it is clear that the model achieves higher classification accuracy when using RGB images compared to black & white images.
+    The validation accuracy is consistently higher for RGB, and the error bars (variance across folds) are generally smaller, indicating more stable and reliable performance.
+    This suggests that the additional color information in RGB images provides valuable features for the SVM classifier, leading to better face recognition results.
 
     Based on these findings, all further analyses and model development in this project were conducted using RGB images only.
     """

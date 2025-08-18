@@ -13,9 +13,12 @@ def app() -> None:
     # Combined explanation of eigenimages, PCA, and the slider functionality
     st.write(
         """
-        This page visualizes the concept of eigenimages using 530 images of George W. Bush from the LFW dataset. By applying Principal Component Analysis (PCA), each face image is represented as a combination of principal components (eigenimages), which capture the most important features across all images and illustrate dimensionality reduction.
-        
-        Use the slider to select the number of principal components used for reconstruction. When the slider is set to 1, the reconstructed image shows the 'average face' of George W. Bush, as only the first principal component (which captures the most variance) is used. Increasing the number of components adds more detail and individuality to the reconstruction, approaching the original image as more components are included.
+        To visualize the concept of eigenimages, the 530 images of George W. Bush from the LFW dataset are used.
+        By applying Principal Component Analysis (PCA) for dimension reduction, each face image is represented as a combination of principal components (eigenimages), 
+        which capture the most important features across all images and illustrate dimensionality reduction.
+
+        Use the slider to select the number of principal components used for reconstruction.
+        When the slider is set to 1, the reconstructed image shows the 'average face' of George W. Bush, as only the first principal component (which captures the most variance) is used. Increasing the number of components adds more detail and individuality to the reconstruction, approaching the original image as more components are included.
         """
     )
 

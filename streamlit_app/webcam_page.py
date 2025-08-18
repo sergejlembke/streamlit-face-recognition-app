@@ -37,14 +37,11 @@ def app() -> None:
     """
     Streamlit app function for live webcam face detection and cropping.
     """
-    st.markdown(
-        """
-        <div class="camera-container">
-            <h2>📷 Live Camera with Face Detection</h2>
-            <p>Faces are automatically detected and highlighted.</p>
-        </div>
-        """, unsafe_allow_html=True
-    )
+
+    st.title('Live Camera Face Detection')
+
+    # Short introduction for the page
+    st.write('To demonstrate the face detection of OpenCV2, you can test the functionality on your own webcam. Faces in the video stream are automatically detected and highlighted with rectangles. You can also capture an image and crop the detected face.')
 
     # Start the webcam stream with real-time face detection
     ctx = webrtc_streamer(
