@@ -26,14 +26,18 @@ def app() -> None:
         """
     )
 
-    # Load Bush images (uint8) and normalize for PCA
-    eigenface_path = os.path.join(os.path.dirname(__file__), "eigenfaces", "Bush.npz")
-    X_Bush_uint8 = np.load(eigenface_path)['Bush']
+
+    # Load the first 100 images of George W. Bush from the LFW dataset
+    from lfw_utils import get_lfw_data_cached
+    lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
+    bush_id = list(lfw.target_names).index('George W Bush')
+    bush_mask = lfw.target == bush_id
+    X_Bush_uint8 = lfw.images[bush_mask][:100]  # shape: (100, h, w, 3)
     X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64) / 255.0
 
     # Slider to select an image and number of PCA components
-    pic = st.slider('Select an image:', 1, 530, 197, key=1) + 1
-    n_components = st.slider('Reduce to $n$ components:', 1, 400, 90, key=2)
+    pic = st.slider('Select an image:', 0, X_Bush_uint8.shape[0] - 1, 0, key=1)
+    n_components = st.slider('Reduce to $n$ components:', 1, min(100, X_Bush_float64.shape[1]), 30, key=2)
 
     # Layout columns for original and eigen images
     col_1, col_2, col_3 = st.columns([1.5, 1.5, 2])
@@ -53,7 +57,8 @@ def app() -> None:
         pca_show = PCA(n_components=n_components, whiten=True, random_state=42)
         X_2D_pca = pca_show.fit_transform(X_Bush_float64)
         X_2D_pca_inv = pca_show.inverse_transform(X_2D_pca)
-        X_4D_pca_inv = X_2D_pca_inv[pic].reshape(100, 75, 3)
+        h, w, c = X_Bush_uint8.shape[1:]
+        X_4D_pca_inv = X_2D_pca_inv[pic].reshape(h, w, c)
         X_4D_pca_inv_uint8 = (np.clip(X_4D_pca_inv, 0, 1) * 255).astype(np.uint8)
         fig = plt.figure()
         plt.title('Eigenimage')
