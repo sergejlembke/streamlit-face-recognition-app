@@ -1,5 +1,6 @@
 # --- Standard library imports ---
 import gc
+import os
 import pickle
 
 # --- Third-party imports ---
@@ -22,8 +23,11 @@ def apply_model_A(selected_model: str, crop: np.ndarray) -> tuple:
     Load the appropriate SVM, PCA, and scaler models for the selected SVM model,
     preprocess the cropped face, and return the fitted objects and transformed face.
     """
-    directory = 'model_A/'
-    
+
+    # Get the directory of this script
+    dirname = os.path.dirname(__file__)
+    directory = os.path.join(dirname, 'model_A')
+
     # Select model file based on user selection
     if 'A1' in selected_model:
         filename_raw = "140_C=1.0_gamma=0.01_PCAn=70_2025-05-09_06-14-04.sav"
@@ -33,11 +37,16 @@ def apply_model_A(selected_model: str, crop: np.ndarray) -> tuple:
         filename_raw = "60_C=1.0_gamma=0.01_PCAn=80_2025-05-09_07-11-12.sav"
     elif 'A4' in selected_model:
         filename_raw = '40_C=10.0_gamma=0.01_PCAn=80_2025-05-09_08-30-10.sav'
-        
+
+    # Build robust paths for model files
+    sca_path = os.path.join(directory, f'SCA_{filename_raw}')
+    pca_path = os.path.join(directory, f'PCA_{filename_raw}')
+    svm_path = os.path.join(directory, f'SVM_{filename_raw}')
+
     # Load the scaler, PCA, and SVM models
-    sca = pickle.load(open(f'{directory}SCA_{filename_raw}', 'rb'))
-    pca = pickle.load(open(f'{directory}PCA_{filename_raw}', 'rb'))
-    svm = pickle.load(open(f'{directory}SVM_{filename_raw}', 'rb'))
+    sca = pickle.load(open(sca_path, 'rb'))
+    pca = pickle.load(open(pca_path, 'rb'))
+    svm = pickle.load(open(svm_path, 'rb'))
 
     # Preprocess the cropped face for prediction
     X_2D = crop.reshape(1, -1).astype(np.float64) / 255.0
