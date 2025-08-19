@@ -1,8 +1,6 @@
 # --- Standard library imports ---
-import os
 import gc
 import pickle
-import sys
 
 # --- Third-party imports ---
 import numpy as np
@@ -13,8 +11,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import cosine_similarity
 
 # --- Local imports ---
-# Add parent directory to sys.path to allow importing lfw_utils from project root
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from lfw_utils import get_lfw_data_cached
 
 # Fetch the LFW dataset (cached)
