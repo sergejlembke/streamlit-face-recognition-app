@@ -36,8 +36,8 @@ def app() -> None:
     X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64)
 
     # Slider to select an image and number of PCA components
-    pic = st.slider('Select an image:', 0, X_Bush_uint8.shape[0] - 1, 142, key=1)
-    n_components = st.slider('Reduce to $n$ components:', 1, min(100, X_Bush_float64.shape[1]), 100, key=2)
+    pic = st.slider('Select an image:', 0, X_Bush_uint8.shape[0] - 1, 50, key=1)
+    n_components = st.slider('Reduce to $n$ components:', 1, min(100, X_Bush_float64.shape[1]), 90, key=2)
 
     # Layout columns for original and eigen images
     col_1, col_2, col_3 = st.columns([1.5, 1.5, 2])
