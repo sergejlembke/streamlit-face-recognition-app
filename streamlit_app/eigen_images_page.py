@@ -1,3 +1,6 @@
+# --- Standard library imports ---
+import os
+
 # --- Third-party imports ---
 import matplotlib.pyplot as plt
 import numpy as np
@@ -24,7 +27,8 @@ def app() -> None:
     )
 
     # Load Bush images (uint8) and normalize for PCA
-    X_Bush_uint8 = np.load('eigenfaces/Bush.npz')['Bush']
+    eigenface_path = os.path.join(os.path.dirname(__file__), "eigenfaces", "Bush.npz")
+    X_Bush_uint8 = np.load(eigenface_path)['Bush']
     X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64) / 255.0
 
     # Slider to select an image and number of PCA components
