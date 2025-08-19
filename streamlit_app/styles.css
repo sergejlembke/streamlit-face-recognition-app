@@ -22,26 +22,6 @@ html, body, .stApp {
     width: 15% !important;
 }
 
-/* Sidebar - Buttons */
-.stButton > button {
-    background-color: #785d8f !important;
-    color: white;
-    border: 1px solid #686868;
-    width: 100% !important;
-    box-sizing: border-box;
-    padding: 0.5em 1em;
-    margin-bottom: 3px;
-    border-radius: 7px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-}
-
-/* Sidebar - Buttons Hover */
-.stButton > button:hover {
-    background-color: #987bb3 !important;
-}
-
 /* Sidebar - Markdown Text */
 [data-testid="stSidebar"] .markdown-text-container {
     color: white !important;
@@ -69,4 +49,24 @@ html, body, .stApp {
 body::-webkit-scrollbar {
     width: 0px;
     background: transparent;
+}
+
+/* Sidebar - Buttons */
+.stButton > button {
+    background-color: #785d8f !important;
+    color: white;
+    border: 1px solid #686868;
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 0.5em 1em;
+    margin-bottom: 3px;
+    border-radius: 7px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Sidebar - Buttons Hover */
+.stButton > button:hover {
+    background-color: #987bb3 !important;
 }
