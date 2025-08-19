@@ -1,3 +1,6 @@
+# --- Standard library imports ---
+import os
+
 # --- Third-party imports ---
 import streamlit as st
 
@@ -60,13 +63,17 @@ def app() -> None:
     # --- Plots for Step 1 ---
     col_1, col_2 = st.columns([1,1])
     with col_1:
-        st.image(image='plots/CS_perperson_Schroeder_everyone.png',
-                caption=f'$CS$ for X_test of Gerhard Schröder with X_train of everyone',
-                width=500)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_perperson_Schroeder_everyone.png'),
+            caption=f'$CS$ for X_test of Gerhard Schröder with X_train of everyone',
+            width=500
+        )
     with col_2:
-        st.image(image='plots/CS_perperson_Schroeder_Bush.png',
-                caption=f'$CS$ for X_test of Gerhard Schröder with X_train of George W. Bush',
-                width=500)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_perperson_Schroeder_Bush.png'),
+            caption=f'$CS$ for X_test of Gerhard Schröder with X_train of George W. Bush',
+            width=500
+        )
     st.write('')
     st.write('')
     st.write('')
@@ -77,9 +84,11 @@ def app() -> None:
     st.write('')
     col_1, col_2, col_3 = st.columns([1,3,1])
     with col_2:
-        st.image(image='plots/CS_perperson_Schroeder_Schroeder.png',
-                caption=f'$CS$ for X_test of Gerhard Schröder with X_train of Gerhard Schröder',
-                width=600)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_perperson_Schroeder_Schroeder.png'),
+            caption=f'$CS$ for X_test of Gerhard Schröder with X_train of Gerhard Schröder',
+            width=600
+        )
     st.write('')
     st.write('')
     st.write('')
@@ -105,13 +114,17 @@ def app() -> None:
     # --- Plots for Step 2, Example 1 ---
     col_1, col_2 = st.columns([2,1])
     with col_1:
-        st.image(image='plots/CS_pic76.png',
-                caption=f'$CS$ for test image 76 with all training images, grouped by person',
-                width=900)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_pic76.png'),
+            caption=f'$CS$ for test image 76 with all training images, grouped by person',
+            width=900
+        )
     with col_2:
-        st.image(image='plots/CS_dist_76.png',
-                caption=f'Aggregated $CS$ values for test image 76. Wrong prediction: Predicted George W. Bush, actual is Donald Rumsfeld.',
-                width=500)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_dist_76.png'),
+            caption=f'Aggregated $CS$ values for test image 76. Wrong prediction: Predicted George W. Bush, actual is Donald Rumsfeld.',
+            width=500
+        )
     st.write('')
     st.divider()
     st.write('')
@@ -120,10 +133,14 @@ def app() -> None:
     # --- Plots for Step 2, Example 2 ---
     col_1, col_2 = st.columns([2,1])
     with col_1:
-        st.image(image='plots/CS_pic99.png',
-                caption=f'$CS$ for test image 99 with all training images, grouped by person',
-                width=900)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_pic99.png'),
+            caption=f'$CS$ for test image 99 with all training images, grouped by person',
+            width=900
+        )
     with col_2:
-        st.image(image='plots/CS_dist_99.png',
-                caption=f'Aggregated $CS$ values for test image 99. Correct prediction: Gerhard Schröder.',
-                width=500)
+        st.image(
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'CS_dist_99.png'),
+            caption=f'Aggregated $CS$ values for test image 99. Correct prediction: Gerhard Schröder.',
+            width=500
+        )
