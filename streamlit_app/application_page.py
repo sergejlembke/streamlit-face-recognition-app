@@ -114,22 +114,22 @@ def app() -> None:
     with col_2:
         # Display the corresponding confusion matrix image for the selected model
         if 'A1' in selected_model:
-            filename_CM = "plots/CM_A_140.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_A_140.png")
         elif 'A2' in selected_model:
-            filename_CM = "plots/CM_A_100.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_A_100.png")
         elif 'A3' in selected_model:
-            filename_CM = "plots/CM_A_60.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_A_60.png")
         elif 'A4' in selected_model:
-            filename_CM = "plots/CM_A_40.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_A_40.png")
         elif 'B1' in selected_model:
-            filename_CM = "plots/CM_B_140.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_B_140.png")
         elif 'B2' in selected_model:
-            filename_CM = "plots/CM_B_100.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_B_100.png")
         elif 'B3' in selected_model:
-            filename_CM = "plots/CM_B_60.png"
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_B_60.png")
         elif 'B4' in selected_model:
-            filename_CM = "plots/CM_B_40.png"
-        
+            filename_CM = file_path = os.path.join(os.path.dirname(__file__), "plots", "CM_B_40.png")
+
         st.image(
             image=filename_CM,
             caption=f'Confusion Matrix of the selected model',
