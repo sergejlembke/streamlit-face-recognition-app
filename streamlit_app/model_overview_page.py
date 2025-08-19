@@ -57,9 +57,7 @@ def app() -> None:
     st.write('')
     st.write('')
     
-    # Get the absolute path to the file, relative to the current script
-    file_path = os.path.join(os.path.dirname(__file__), "plots", "numer_of_pictures.png")
-    st.image(image=file_path,
+    st.image(image=os.path.join(os.path.dirname(__file__), "plots", "numer_of_pictures.png"),
             caption='Distribution of images per person in the LFW dataset',
             width=900)
     

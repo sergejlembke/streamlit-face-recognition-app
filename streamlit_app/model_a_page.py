@@ -1,3 +1,6 @@
+# --- Standard library imports ---
+import os
+
 # --- Third-party imports ---
 import streamlit as st
 
@@ -23,7 +26,7 @@ def app() -> None:
 
     # Show PCA plot for the LFW dataset
     st.image(
-        image='plots/pca.png',
+        image=os.path.join(os.path.dirname(__file__), 'plots', 'pca.png'),
         caption='PCA on LFW Dataset',
         width=600
     )
@@ -63,13 +66,13 @@ def app() -> None:
     col_1, col_2 = st.columns([1,1])
     with col_1:
         st.image(
-            image='plots/FIG_bw_100x75_80_sca_pca_svm_2025-05-01_07-06-14.png',
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'FIG_bw_100x75_80_sca_pca_svm_2025-05-01_07-06-14.png'),
             caption='Model A - Black and White: Gridsearch-CV for PCA and SVM',
             width=600
         )
     with col_2:
         st.image(
-            image='plots/FIG_clr_100x75_80_sca_pca_svm_2025-05-02_22-21-35.png',
+            image=os.path.join(os.path.dirname(__file__), 'plots', 'FIG_clr_100x75_80_sca_pca_svm_2025-05-02_22-21-35.png'),
             caption='Model A - RGB Spectrum: Gridsearch-CV for PCA and SVM',
             width=600
         )
