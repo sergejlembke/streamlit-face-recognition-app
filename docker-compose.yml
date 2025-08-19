@@ -1,0 +1,12 @@
+services:
+  streamlit:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./:/streamlit-face-recognition-app
+    ports:
+      - '8501:8501'
+    working_dir: /streamlit-face-recognition-app/streamlit_app
+    command: streamlit run main.py
+
