@@ -13,9 +13,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 # --- Local imports ---
 from lfw_utils import get_lfw_data_cached
 
+
 # Fetch the LFW dataset (cached)
 lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
-
 
 def apply_model_A(selected_model: str, crop: np.ndarray) -> tuple:
     """

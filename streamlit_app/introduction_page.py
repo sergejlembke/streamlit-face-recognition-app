@@ -1,6 +1,7 @@
 # --- Third-party imports ---
 import streamlit as st
 
+
 def app() -> None:
     """
     Streamlit introduction page for the Face Recognition App.

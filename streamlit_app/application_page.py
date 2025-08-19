@@ -14,8 +14,6 @@ import face_detection
 import face_recognition
 from lfw_utils import get_lfw_data_cached
 
-# Add parent directory to sys.path to allow importing lfw_utils from project root
-# from lfw_utils import get_lfw_data_cached
 
 # Fetch the LFW dataset (cached)
 lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)

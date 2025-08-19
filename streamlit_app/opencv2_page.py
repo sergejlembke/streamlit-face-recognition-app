@@ -1,6 +1,7 @@
 # --- Third-party imports ---
 import streamlit as st
 
+
 def app() -> None:
     """
     Streamlit app function for demonstrating OpenCV2 functionalities.

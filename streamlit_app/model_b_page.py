@@ -1,6 +1,7 @@
 # --- Third-party imports ---
 import streamlit as st
 
+
 def app() -> None:
     """
     Streamlit page for Model B: Cosine Similarity Face Recognition (Non-Learning Approach).

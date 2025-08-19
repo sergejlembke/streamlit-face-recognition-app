@@ -1,6 +1,7 @@
 # --- Third-party imports ---
 import streamlit as st
 
+
 def app() -> None:
     """
     Streamlit page providing an overview and comparison of the face recognition models in this project.

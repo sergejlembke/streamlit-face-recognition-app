@@ -7,6 +7,7 @@ import cv2
 import numpy as np
 from typing import Optional, Any
 
+
 # Load Haar cascade for face detection
 face_cascade = cv2.CascadeClassifier("face_detection/haarcascade_frontalface_default.xml")
 
