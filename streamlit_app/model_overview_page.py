@@ -1,3 +1,6 @@
+# --- Standard library imports ---
+import os
+
 # --- Third-party imports ---
 import streamlit as st
 
@@ -54,7 +57,9 @@ def app() -> None:
     st.write('')
     st.write('')
     
-    st.image(image='plots/numer_of_pictures.png',
+    # Get the absolute path to the file, relative to the current script
+    file_path = os.path.join(os.path.dirname(__file__), "plots", "numer_of_pictures.png")
+    st.image(image=file_path,
             caption='Distribution of images per person in the LFW dataset',
             width=900)
     
