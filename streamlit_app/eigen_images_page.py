@@ -32,12 +32,12 @@ def app() -> None:
     lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
     bush_id = list(lfw.target_names).index('George W Bush')
     bush_mask = lfw.target == bush_id
-    X_Bush_uint8 = lfw.images[bush_mask][:500]  # shape: (200, h, w, 3)
+    X_Bush_uint8 = lfw.images[bush_mask][:100]  # shape: (100, h, w, 3)
     X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64)
 
     # Slider to select an image and number of PCA components
     pic = st.slider('Select an image:', 0, X_Bush_uint8.shape[0] - 1, 142, key=1)
-    n_components = st.slider('Reduce to $n$ components:', 1, min(200, X_Bush_float64.shape[1]), 100, key=2)
+    n_components = st.slider('Reduce to $n$ components:', 1, min(100, X_Bush_float64.shape[1]), 100, key=2)
 
     # Layout columns for original and eigen images
     col_1, col_2, col_3 = st.columns([1.5, 1.5, 2])
