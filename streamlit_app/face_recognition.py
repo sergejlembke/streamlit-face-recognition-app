@@ -11,7 +11,6 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.datasets import fetch_lfw_people
 
 # --- Local imports ---
 # Add parent directory to sys.path to allow importing lfw_utils from project root
@@ -74,9 +73,6 @@ def preprocess_cs(selected_model: str, crop: np.ndarray) -> tuple:
         n_components = 450
         min_faces = 40
     
-    # Fetch the LFW dataset
-    lfw = fetch_lfw_people(color=True, resize=0.8, funneled=True, download_if_missing=True)
-
     X_all = lfw.images
     y_all = lfw.target
     target_names_all = lfw.target_names
