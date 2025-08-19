@@ -2,7 +2,7 @@
 
 [data-testid="stSidebar"] {
     background-color: #519782;
-    width: 13% !important;
+    width: 15% !important;
 }
 
 [data-testid="stSidebar"] .markdown-text-container {
