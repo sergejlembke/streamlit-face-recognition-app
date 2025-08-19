@@ -17,7 +17,7 @@ def app() -> None:
     # Combined explanation of eigenimages, PCA, and the slider functionality
     st.write(
         """
-        To visualize the concept of eigenimages, the 530 images of George W. Bush from the LFW dataset are used.
+        To visualize the concept of eigenimages, the 200 images of George W. Bush from the LFW dataset are used.
         By applying Principal Component Analysis (PCA) for dimension reduction, each face image is represented as a combination of principal components (eigenimages), 
         which capture the most important features across all images and illustrate dimensionality reduction.
 
@@ -32,37 +32,36 @@ def app() -> None:
     lfw = get_lfw_data_cached(color=True, resize=0.8, funneled=True, download_if_missing=True)
     bush_id = list(lfw.target_names).index('George W Bush')
     bush_mask = lfw.target == bush_id
-    X_Bush_uint8 = lfw.images[bush_mask][:100]  # shape: (100, h, w, 3)
-    X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64) / 255.0
+    X_Bush_uint8 = lfw.images[bush_mask][:500]  # shape: (200, h, w, 3)
+    X_Bush_float64 = X_Bush_uint8.reshape(X_Bush_uint8.shape[0], -1).astype(np.float64)
 
     # Slider to select an image and number of PCA components
-    pic = st.slider('Select an image:', 0, X_Bush_uint8.shape[0] - 1, 0, key=1)
-    n_components = st.slider('Reduce to $n$ components:', 1, min(100, X_Bush_float64.shape[1]), 30, key=2)
+    pic = st.slider('Select an image:', 0, X_Bush_uint8.shape[0] - 1, 142, key=1)
+    n_components = st.slider('Reduce to $n$ components:', 1, min(200, X_Bush_float64.shape[1]), 100, key=2)
 
     # Layout columns for original and eigen images
     col_1, col_2, col_3 = st.columns([1.5, 1.5, 2])
+    h, w, c = X_Bush_uint8.shape[1:]
 
     with col_1:
-        # Show the original image
-        image_4Darray = X_Bush_uint8[pic]
+        # Show the original image (use uint8 for display)
         fig = plt.figure()
         plt.title('Original Image')
         plt.xlabel(f'$w$')
         plt.ylabel(f'$h$')
-        plt.imshow(image_4Darray)
+        plt.imshow(X_Bush_uint8[pic])
         st.pyplot(fig)
 
     with col_2:
         # Apply PCA and show the reconstructed eigenimage
-        pca_show = PCA(n_components=n_components, whiten=True, random_state=42)
+        pca_show = PCA(n_components=n_components, whiten=False, random_state=42)
         X_2D_pca = pca_show.fit_transform(X_Bush_float64)
         X_2D_pca_inv = pca_show.inverse_transform(X_2D_pca)
-        h, w, c = X_Bush_uint8.shape[1:]
         X_4D_pca_inv = X_2D_pca_inv[pic].reshape(h, w, c)
-        X_4D_pca_inv_uint8 = (np.clip(X_4D_pca_inv, 0, 1) * 255).astype(np.uint8)
+        # Plot float image directly for debugging
         fig = plt.figure()
-        plt.title('Eigenimage')
+        plt.title('Eigenimage (float)')
         plt.xlabel(f'$w$')
         plt.ylabel(f'$h$')
-        plt.imshow(X_4D_pca_inv_uint8)
+        plt.imshow(np.clip(X_4D_pca_inv, 0, 1))
         st.pyplot(fig)
