@@ -17,23 +17,28 @@ def get_face(image_url: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         - image with detected face marked (RGB)
         - cropped face image (RGB, resized to 75x100)
     """
-    # Download the image from the provided URL
-    img_data = requests.get(image_url).content
-    with open('face_detection/image.jpg', 'wb') as handler:
-        handler.write(img_data)
-        
-    # Load the Haar cascade classifier for face detection
-    face_cascade = cv2.CascadeClassifier("face_detection/haarcascade_frontalface_default.xml")
 
     # Get the directory of this script
     dirname = os.path.dirname(__file__)
+    # Build robust paths for image and cascade file
+    image_path = os.path.join(dirname, "face_detection", "image.jpg")
+    cascade_path = os.path.join(dirname, "face_detection", "haarcascade_frontalface_default.xml")
+
+    # Download the image from the provided URL
+    img_data = requests.get(image_url).content
+    with open(image_path, 'wb') as handler:
+        handler.write(img_data)
+
+    # Load the Haar cascade classifier for face detection
+    face_cascade = cv2.CascadeClassifier(cascade_path)
+
     relevant_folder = os.path.join(dirname, "face_detection")
 
     # Walk through the folder to find images
     for root, dirs, images in os.walk(relevant_folder):
         for image_name in images:
-            image_path = os.path.join(root, image_name)
-            original_image = cv2.imread(image_path)
+            img_path = os.path.join(root, image_name)
+            original_image = cv2.imread(img_path)
 
             # Process the image if it was loaded successfully
             if original_image is not None:
