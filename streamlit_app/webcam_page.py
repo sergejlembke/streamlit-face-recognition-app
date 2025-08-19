@@ -25,7 +25,7 @@ class VideoProcessor(VideoTransformerBase):
     def __init__(self) -> None:
         self.frame: Optional[np.ndarray] = None
 
-    def transform(self, frame: Any) -> np.ndarray:
+    def recv(self, frame: Any) -> np.ndarray:
         """
         Detect faces in the video frame and draw rectangles around them.
         """
