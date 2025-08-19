@@ -5,7 +5,11 @@ import os
 import streamlit as st
 
 # Set Streamlit page layout to wide
-st.set_page_config(layout='wide') 
+st.set_page_config(
+    page_title='Face Recognition App',
+    page_icon=':camera:',
+    layout='wide',
+)
 
 # Import all Streamlit app pages
 import application_page
