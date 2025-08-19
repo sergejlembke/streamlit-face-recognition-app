@@ -1,3 +1,6 @@
+# --- Standard library imports ---
+import os
+
 # --- Third-party imports ---
 import streamlit as st
 
@@ -16,7 +19,8 @@ import webcam_page
 
 def load_css(file_path: str) -> None:
     """Load a custom CSS file for Streamlit styling."""
-    with open(file_path) as f:
+    css_path = os.path.join(os.path.dirname(__file__), file_path)
+    with open(css_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
