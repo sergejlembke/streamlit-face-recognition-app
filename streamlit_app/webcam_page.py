@@ -1,5 +1,8 @@
 # Uses OpenCV (cv2) and haarcascade_frontalface_default.xml, both licensed under Apache 2.0.
 
+# --- Standard library imports ---
+import os
+
 # --- Third-party imports ---
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
@@ -9,7 +12,7 @@ from typing import Optional, Any
 
 
 # Load Haar cascade for face detection
-face_cascade = cv2.CascadeClassifier("face_detection/haarcascade_frontalface_default.xml")
+face_cascade = cv2.CascadeClassifier(os.path.join("face_detection", "haarcascade_frontalface_default.xml"))
 
 # Initialize session state for storing the captured image
 if "captured_image" not in st.session_state:
