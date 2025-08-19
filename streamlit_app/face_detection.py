@@ -1,10 +1,10 @@
 # Uses OpenCV (cv2) and haarcascade_frontalface_default.xml, both licensed under Apache 2.0.
 
 # --- Standard library imports ---
-import cv2
 import os
 
 # --- Third-party imports ---
+import cv2
 import numpy as np
 import requests
 
