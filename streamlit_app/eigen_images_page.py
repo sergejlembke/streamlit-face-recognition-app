@@ -17,15 +17,14 @@ def app() -> None:
     # Combined explanation of eigenimages, PCA, and the slider functionality
     st.write(
         """
-        To visualize the concept of eigenimages, the 200 images of George W. Bush from the LFW dataset are used.
+        To visualize the concept of eigenimages, the 50 images of George W. Bush from the LFW dataset are used.
         By applying Principal Component Analysis (PCA) for dimension reduction, each face image is represented as a combination of principal components (eigenimages), 
         which capture the most important features across all images and illustrate dimensionality reduction.
 
         Use the slider to select the number of principal components used for reconstruction.
-        When the slider is set to 1, the reconstructed image shows the 'average face' of George W. Bush, as only the first principal component (which captures the most variance) is used. Increasing the number of components adds more detail and individuality to the reconstruction, approaching the original image as more components are included.
+        When the slider is set to 1, the reconstructed image shows the 'average face' of George W. Bush from the 50 images, as only the first principal component (which captures the most variance) is used. Increasing the number of components adds more detail and individuality to the reconstruction, approaching the original image as more components are included.
         """
     )
-
 
     # Load the first 50 images of George W. Bush from the LFW dataset
     from lfw_utils import get_lfw_data_cached
@@ -60,7 +59,7 @@ def app() -> None:
         X_4D_pca_inv = X_2D_pca_inv[pic].reshape(h, w, c)
         # Plot float image directly for debugging
         fig = plt.figure()
-        plt.title('Eigenimage (float)')
+        plt.title('Eigenimage')
         plt.xlabel(f'$w$')
         plt.ylabel(f'$h$')
         plt.imshow(np.clip(X_4D_pca_inv, 0, 1))
