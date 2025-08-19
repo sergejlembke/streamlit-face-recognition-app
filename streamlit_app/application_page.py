@@ -1,6 +1,5 @@
 # --- Standard library imports ---
 import os
-import sys
 
 # --- Third-party imports ---
 import matplotlib.pyplot as plt
