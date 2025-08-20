@@ -91,23 +91,23 @@ def app() -> None:
             "**Select a model for prediction**",
             [
                 ':rainbow[A1: PCA + SVM [96.15 % Accuracy]]',
-                ':rainbow[A2: PCA + SVM [90.79 % Accuracy]]',
-                ':rainbow[A3: PCA + SVM [85.56 % Accuracy]]',
-                ':rainbow[A4: PCA + SVM [74.87 % Accuracy]]',
                 ':rainbow[B1: PCA + CS [96.15 % Accuracy]]',
+                ':rainbow[A2: PCA + SVM [90.79 % Accuracy]]',
                 ':rainbow[B2: PCA + CS [90.79 % Accuracy]]',
+                ':rainbow[A3: PCA + SVM [85.56 % Accuracy]]',
                 ':rainbow[B3: PCA + CS [87.78 % Accuracy]]',
+                ':rainbow[A4: PCA + SVM [74.87 % Accuracy]]',
                 ':rainbow[B4: PCA + CS [77.54 % Accuracy]]'
             ],
             captions=[
+                "",
                 "3 people  [Colin Powell, George W Bush, Tony Blair]",
+                "",
                 "5 people  [Colin Powell, Donald Rumsfeld, George W Bush, Gerhard Schroeder, Tony Blair]",
+                "",
                 "8 people  [Ariel Sharon, Colin Powell, Donald Rumsfeld, George W Bush, Gerhard Schroeder, Hugo Chavez, Junichiro Koizumi, Tony Blair]",
+                "",
                 "19 people [Ariel Sharon, Arnold Schwarzenegger, Colin Powell, Donald Rumsfeld, George W Bush, Gerhard Schroeder, Gloria Macapagal Arroyo, Hugo Chavez, Jacques Chirac, Jean Chretien, Jennifer Capriati, John Ashcroft, Junichiro Koizumi, Laura Bush, Lleyton Hewitt, Luiz Inacio Lula da Silva, Serena Williams, Tony Blair, Vladimir Putin]",
-                "3 people  [Colin Powell, George W Bush, Tony Blair]",
-                "5 people  [Colin Powell, Donald Rumsfeld, George W Bush, Gerhard Schroeder, Tony Blair]",
-                "8 people  [Ariel Sharon, Colin Powell, Donald Rumsfeld, George W Bush, Gerhard Schroeder, Hugo Chavez, Junichiro Koizumi, Tony Blair]",
-                "19 people [Ariel Sharon, Arnold Schwarzenegger, Colin Powell, Donald Rumsfeld, George W Bush, Gerhard Schroeder, Gloria Macapagal Arroyo, Hugo Chavez, Jacques Chirac, Jean Chretien, Jennifer Capriati, John Ashcroft, Junichiro Koizumi, Laura Bush, Lleyton Hewitt, Luiz Inacio Lula da Silva, Serena Williams, Tony Blair, Vladimir Putin]"
             ]
         ) 
     with col_2:
@@ -132,7 +132,7 @@ def app() -> None:
         st.image(
             image=filename_CM,
             caption=f'Confusion Matrix of the selected model',
-            width=700
+            width=600
         )
 
     # --- Model application ---
