@@ -1,5 +1,4 @@
 # 👤 Face Recognition with PCA, SVM & Cosine Similarity, based on LFW dataset
-
 Link to app: https://lfw-face-recognition-demo.streamlit.app/
 
 ## 🎯 Project Description
