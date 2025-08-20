@@ -1,0 +1,5 @@
+.devcontainer
+.github
+__pycache__
+streamlit_app/face_detection/image.jpg
+app_demo.png
