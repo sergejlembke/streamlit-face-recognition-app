@@ -35,8 +35,8 @@ The goal was to implement, compare, and deploy different approaches for face rec
 ---
 
 ## 📈 Results
-- **SVM model:** between 74.87% and 95.15% accuracy  
-- **Cosine similarity:** between 77.54% and 96.15% accuracy  
+- **SVM model:** between 74.87% (19 different targets) and 95.15% (3 different targets) accuracy  
+- **Cosine similarity:** between 77.54% (19 different targets) and 96.15% (3 different targets) accuracy  
 - Screenshot of the app:  
   ![Streamlit App Screenshot](app_demo.png)
 
