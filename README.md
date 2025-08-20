@@ -47,8 +47,7 @@ The goal was to implement, compare, and deploy different approaches for face rec
 git clone https://github.com/sergejlembke/streamlit-face-recognition-app.git
 cd streamlit-face-recognition-app
 pip install -r requirements.txt
-cd streamlit_app
-streamlit run main.py
+streamlit run streamlit_app/main.py
 ```
 
 ---
