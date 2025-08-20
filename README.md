@@ -1,5 +1,7 @@
 # 👤 Face Recognition with PCA, SVM & Cosine Similarity, based on LFW dataset
 
+Link to app: https://lfw-face-recognition-demo.streamlit.app/
+
 ## 🎯 Project Description
 This project was developed as the final assignment of my Data Science Bootcamp (2025).  
 The goal was to implement, compare, and deploy different approaches for face recognition using an interactive Streamlit app.
