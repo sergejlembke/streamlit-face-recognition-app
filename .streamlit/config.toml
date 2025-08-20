@@ -4,5 +4,4 @@ primaryColor="#519782"
 
 [server]
 headless = true
-enableCORS = false
 port = 8501
