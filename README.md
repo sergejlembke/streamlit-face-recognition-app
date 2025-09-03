@@ -44,9 +44,21 @@ The goal was to implement, compare, and deploy different approaches for face rec
 
 ## 🛠️ Installation & Usage
 ```bash
+# Clone the repository and change into the directory
 git clone https://github.com/sergejlembke/streamlit-face-recognition-app.git
 cd streamlit-face-recognition-app
+
+# Create and activate a virtual environment (recommended)
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the Streamlit app
 streamlit run streamlit_app/main.py
 ```
 
