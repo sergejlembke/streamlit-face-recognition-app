@@ -1,13 +1,12 @@
 # 👤 Face Recognition with PCA, SVM & Cosine Similarity, based on LFW dataset
 Link to app: https://lfw-face-recognition-demo.streamlit.app/
 
-## 🎯 Project Description
 This project was developed as the final assignment of my Data Science Bootcamp (2025).  
-The goal was to implement, compare, and deploy different approaches for face recognition using an interactive Streamlit app.
+The goal was to implement, compare, and deploy different approaches for face recognition using an interactive Streamlit app, providing a hands-on demonstration of machine learnaing technologies.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 - **Technologies:** Python, NumPy, scikit-learn, openCV2, Streamlit  
 - **Algorithms:** Principal Component Analysis (PCA), Support Vector Machines (SVM), Cosine Similarity  
 - **Dataset:** [LFW – Labeled Faces in the Wild](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_lfw_people.html) fetched from scikit-learn
@@ -62,9 +61,13 @@ pip install -r requirements.txt
 streamlit run streamlit_app/main.py
 ```
 
+**Required Python version:** 3.10 or higher
+
 ---
+ 
+## 📜 License & Third-Party Dependencies
 
-## 📄 Licenses & Third-Party Dependencies
-
-- This project uses [OpenCV (cv2)](https://opencv.org/), which is licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
-- The Haar cascade file [haarcascade_frontalface_default.xml](https://github.com/opencv/opencv/blob/4.x/data/haarcascades/haarcascade_frontalface_default.xml) is part of the OpenCV project and is also licensed under the Apache 2.0 License.
+This project is licensed under the **AGPL-3.0 License** – see the [LICENSE]([LICENSE](https://www.gnu.org/licenses/agpl-3.0.en.html)) file for details.  
+It uses the following third-party dependencies: 
+- [OpenCV (cv2)](https://opencv.org/), which is licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
+- Haar cascade file [haarcascade_frontalface_default.xml](https://github.com/opencv/opencv/blob/4.x/data/haarcascades/haarcascade_frontalface_default.xml), which is part of the OpenCV project and is also licensed under the Apache 2.0 License.
