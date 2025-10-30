@@ -20,16 +20,13 @@ import matplotlib
 matplotlib.use('TkAgg')  # Use TkAgg backend for matplotlib
 import numpy as np  # Numerical operations
 
-# --- Typing imports ---
-from typing import List
-
 
 # --- Parameter configuration ---
 min_faces: int = 40  # Minimum number of images per person
 color: bool = True  # Use color images
 n_components: int = 90  # Number of PCA components
-C: List[float] = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9]  # SVM C values
-GAMMA: List[float] = [1e-4, 1e-3, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8]  # SVM gamma values
+C: list[float] = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9]  # SVM C values
+GAMMA: list[float] = [1e-4, 1e-3, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-8]  # SVM gamma values
 ROS: bool = True  # Use RandomOverSampler for class balancing
 save: bool = False  # Do not save models
 
