@@ -19,18 +19,15 @@ import pandas as pd  # DataFrame operations
 # --- Local import: Cosine Similarity pipeline function ---
 from pipelines import call_pipeline_cs
 
-# --- Typing imports ---
-from typing import List
-
 
 # --- Hyperparameter grid ---
-MIN_FACES: List[int] = [140, 100, 60, 40, 30, 20]  # Minimum images per person
-N_COMPONENTS: List[int] = [60, 80, 100, 120, 140, 160, 180, 200]  # PCA components
+MIN_FACES: list[int] = [140, 100, 60, 40, 30, 20]  # Minimum images per person
+N_COMPONENTS: list[int] = [60, 80, 100, 120, 140, 160, 180, 200]  # PCA components
 
 # --- Storage for results ---
-val_min_faces: List[int] = []
-val_n_components: List[int] = []
-val_acc: List[float] = []
+val_min_faces: list[int] = []
+val_n_components: list[int] = []
+val_acc: list[float] = []
 
 counter: int = 0
 combinations: int = len(MIN_FACES) * len(N_COMPONENTS)
