@@ -13,14 +13,11 @@ Date: 2025-08-19
 # --- Local import: SVM pipeline function ---
 from pipelines import call_pipeline_svm
 
-# --- Typing imports ---
-from typing import List
-
 
 # --- Hyperparameter grid for grid search ---
-C: List[float] = [1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]  # SVM regularization parameters
-GAMMA: List[float] = [1e-4, 1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4]  # SVM kernel coefficients
-N_COMPONENTS: List[int] = [60, 80, 100, 120, 140, 160, 180, 200]  # PCA components
+C: list[float] = [1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]  # SVM regularization parameters
+GAMMA: list[float] = [1e-4, 1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4]  # SVM kernel coefficients
+N_COMPONENTS: list[int] = [60, 80, 100, 120, 140, 160, 180, 200]  # PCA components
 
 # --- Pipeline configuration ---
 COLOR: bool = True  # Use color images
