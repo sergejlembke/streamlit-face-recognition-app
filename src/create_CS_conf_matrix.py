@@ -13,13 +13,10 @@ Date: 2025-08-19
 # --- Local import: Cosine Similarity pipeline function ---
 from pipelines import call_pipeline_cs
 
-# --- Typing imports ---
-from typing import List
-
 
 # --- Parameter configuration ---
-MIN_FACES: List[int] = [40]      # Minimum images per person
-N_COMPONENTS: List[int] = [450]  # Number of PCA components
+MIN_FACES: list[int] = [40]      # Minimum images per person
+N_COMPONENTS: list[int] = [450]  # Number of PCA components
 
 counter: int = 0
 combinations: int = len(MIN_FACES) * len(N_COMPONENTS)
