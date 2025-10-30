@@ -33,9 +33,6 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 from sklearn.pipeline import Pipeline  # ML pipelines
 from sklearn.preprocessing import StandardScaler  # Feature scaling
 
-# --- Typing imports ---
-from typing import Tuple, List
-
 
 def train_test_svm(
     min_faces: int,
@@ -165,9 +162,9 @@ def call_pipeline_svm(
     pipe_name: str,
     min_faces: int,
     color: bool,
-    n_components: List[int],
-    C: List[float],
-    gamma: List[float],
+    n_components: list[int],
+    C: list[float],
+    gamma: list[float],
     ROS: bool
 ) -> None:
     """
