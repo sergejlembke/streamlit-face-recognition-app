@@ -1,4 +1,4 @@
-# 👤 Face Recognition with PCA, SVM & Cosine Similarity, based on LFW dataset
+# Face Recognition with PCA, SVM & Cosine Similarity, based on LFW dataset
 Link to app: https://lfw-face-recognition-demo.streamlit.app/
 
 This project was developed as the final assignment of my Data Science Bootcamp (2025).  
@@ -6,7 +6,7 @@ The goal was to implement, compare, and deploy different approaches for face rec
 
 ---
 
-## ✨ Features
+## Features
 - **Technologies:** Python, NumPy, scikit-learn, openCV2, Streamlit  
 - **Algorithms:** Principal Component Analysis (PCA), Support Vector Machines (SVM), Cosine Similarity  
 - **Dataset:** [LFW – Labeled Faces in the Wild](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_lfw_people.html) fetched from scikit-learn
@@ -14,7 +14,7 @@ The goal was to implement, compare, and deploy different approaches for face rec
 
 ---
 
-## 📊 Approach
+## Approach
 1. **Data preprocessing**  
    - Loading & cleaning the LFW dataset
    - Normalization
@@ -33,7 +33,7 @@ The goal was to implement, compare, and deploy different approaches for face rec
 
 ---
 
-## 📈 Results
+## Results
 - **SVM model:** between 74.87% (19 different targets) and 95.15% (3 different targets) accuracy  
 - **Cosine similarity:** between 77.54% (19 different targets) and 96.15% (3 different targets) accuracy  
 - Screenshot of the app:  
@@ -41,7 +41,7 @@ The goal was to implement, compare, and deploy different approaches for face rec
 
 ---
 
-## 🛠️ Installation & Usage
+## Installation & Usage
 ```bash
 # Clone the repository and change into the directory
 git clone https://github.com/sergejlembke/streamlit-face-recognition-app.git
@@ -65,13 +65,13 @@ streamlit run streamlit_app/main.py
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the **AGPL-3.0 License** – see the [LICENSE](https://www.gnu.org/licenses/agpl-3.0.en.html) file for details.
 
 ---
 
-## 🧩 Third-Party Dependencies
+## Third-Party Dependencies
 
 This project uses the following third-party dependencies:
 - [OpenCV (cv2)](https://opencv.org/), licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0).
